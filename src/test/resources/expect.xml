@@ -1,0 +1,54 @@
+<!--
+  Copyright (c) 2008 lib4j
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  
+  You should have received a copy of The MIT License (MIT) along with this
+  program. If not, see <http://opensource.org/licenses/MIT/>.
+-->
+
+<ex:script
+  xmlns:ex="http://commons.safris.org/expect.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://commons.safris.org/expect.xsd http://commons.safris.org/expect.xsd">
+  <ex:process exec="java org.safris.commons.expect.ExpectSimulator ${date}">
+    <ex:rule id="r1" expect="Would you like to create a roster\?" respond="Y"/>
+    <ex:rule id="r2" expect="What is the name of the person\?" respond="${name}"/>
+    <ex:rule id="r3" expect="Is [\$\{\}a-zA-Z]+ an adult or a child\?" respond="${adultOrChild}"/>
+    <ex:rule id="r4" expect="Is the person a male or female\?" respond="${maleOrFemale}"/>
+    <ex:rule id="r5" expect="Will the [\$\{\}a-zA-Z]+ be attending the bbq\?" respond="${attending}"/>
+    <ex:rule id="r6" expect="Is this a boy or a girl\?" respond="${boyOrGirl}"/>
+    <ex:rule id="r7" expect="What is \$\{person\}'s age\?" respond="${age}"/>
+    <ex:rule id="r8" expect="On what date will you see \$\{person\}\?" respond="${date}"/>
+    <ex:rule id="r9" expect="Will \$\{person\} bring stuff to the bbq\?" respond="${bringingStuff}"/>
+    <ex:rule id="r10" expect="Will \$\{person\} be drinking\?" respond="${drinking}"/>
+    <ex:rule id="r11" expect="Will \$\{person\} neet to be driving\?" respond="${driving}"/>
+    <ex:rule id="r12" expect="Will \$\{person\} need a ride\?" respond="${needRide}"/>
+    <ex:rule id="r13" expect="Print the roster\?" respond="${printRoster}"/>
+    <ex:rule id="r14" expect="Quit\?" respond="Y"/>
+    <ex:tree>
+      <ex:node rule="r1" children="r2"/>
+      <ex:node rule="r2" children="r3"/>
+      <ex:node rule="r3" children="r4 r6"/>
+      <ex:node rule="r4" children="r5"/>
+      <ex:node rule="r6" children="r7"/>
+      <ex:node rule="r7" children="r5"/>
+      <ex:node rule="r5" children="r2 r8"/>
+      <ex:node rule="r8" children="r9"/>
+      <ex:node rule="r9" children="r10"/>
+      <ex:node rule="r10" children="r11 r13"/>
+      <ex:node rule="r11" children="r12 r13"/>
+      <ex:node rule="r12" children="r13"/>
+      <ex:node rule="r13" children="r2 r14"/>
+      <ex:node rule="r14"/>
+    </ex:tree>
+  </ex:process>
+</ex:script>
