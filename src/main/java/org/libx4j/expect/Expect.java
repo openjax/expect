@@ -31,13 +31,13 @@ import org.lib4j.exec.Processes;
 import org.lib4j.io.input.NonBlockingInputStream;
 import org.lib4j.io.scanner.InputStreamScanner;
 import org.lib4j.io.scanner.ScannerHandler;
+import org.lib4j.util.ELs;
+import org.lib4j.util.ExpressionFormatException;
+import org.lib4j.util.HashTree;
 import org.libx4j.xsb.runtime.Bindings;
 import org.safris.commons.expect.xe.$ex_processType;
 import org.safris.commons.expect.xe.$ex_ruleType;
 import org.safris.commons.expect.xe.ex_script;
-import org.safris.commons.util.ELs;
-import org.safris.commons.util.ExpressionFormatException;
-import org.safris.commons.util.HashTree;
 import org.xml.sax.InputSource;
 
 public final class Expect {
