@@ -14,7 +14,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.safris.commons.expect;
+package org.libx4j.expect;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.libx4j.xsb.runtime.Bindings;
 import org.safris.commons.exec.Processes;
 import org.safris.commons.expect.xe.$ex_processType;
 import org.safris.commons.expect.xe.$ex_ruleType;
@@ -37,7 +38,6 @@ import org.safris.commons.io.scanner.ScannerHandler;
 import org.safris.commons.util.ELs;
 import org.safris.commons.util.ExpressionFormatException;
 import org.safris.commons.util.HashTree;
-import org.safris.xsb.runtime.Bindings;
 import org.xml.sax.InputSource;
 
 public final class Expect {

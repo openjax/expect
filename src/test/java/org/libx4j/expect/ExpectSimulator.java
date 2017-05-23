@@ -14,7 +14,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.safris.commons.expect;
+package org.libx4j.expect;
 
 import java.util.ArrayList;
 import java.util.List;
