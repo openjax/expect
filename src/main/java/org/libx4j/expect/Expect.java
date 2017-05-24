@@ -34,10 +34,10 @@ import org.lib4j.io.scanner.ScannerHandler;
 import org.lib4j.util.ELs;
 import org.lib4j.util.ExpressionFormatException;
 import org.lib4j.util.HashTree;
+import org.libx4j.expect.xe.$ex_processType;
+import org.libx4j.expect.xe.$ex_ruleType;
+import org.libx4j.expect.xe.ex_script;
 import org.libx4j.xsb.runtime.Bindings;
-import org.safris.commons.expect.xe.$ex_processType;
-import org.safris.commons.expect.xe.$ex_ruleType;
-import org.safris.commons.expect.xe.ex_script;
 import org.xml.sax.InputSource;
 
 public final class Expect {

@@ -14,11 +14,10 @@
   You should have received a copy of The MIT License (MIT) along with this
   program. If not, see <http://opensource.org/licenses/MIT/>.
 -->
-
 <ex:script
-  xmlns:ex="http://commons.safris.org/expect.xsd"
+  xmlns:ex="http://libx4j.org/expect.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://commons.safris.org/expect.xsd http://commons.safris.org/expect.xsd">
+  xsi:schemaLocation="http://libx4j.org/expect.xsd http://libx4j.org/expect.xsd">
   <ex:process exec="java org.safris.commons.expect.ExpectSimulator ${date}">
     <ex:rule id="r1" expect="Would you like to create a roster\?" respond="Y"/>
     <ex:rule id="r2" expect="What is the name of the person\?" respond="${name}"/>
