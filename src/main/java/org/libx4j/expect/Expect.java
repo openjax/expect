@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +33,6 @@ import org.lib4j.io.input.NonBlockingInputStream;
 import org.lib4j.io.scanner.InputStreamScanner;
 import org.lib4j.io.scanner.ScannerHandler;
 import org.lib4j.util.ELs;
-import org.lib4j.util.ExpressionFormatException;
 import org.lib4j.util.HashTree;
 import org.libx4j.expect.xe.$ex_processType;
 import org.libx4j.expect.xe.$ex_ruleType;
@@ -89,7 +89,7 @@ public final class Expect {
     // This is important: since we are not reading from STDERR, we must start a NonBlockingInputStream
     // on it such that its buffer doesn't fill. This is necessary because the STDERR of the sub-process
     // is teed into 2 input streams that both need to be read from: System.err, and process.getErrorStream()
-    try(final NonBlockingInputStream stream = new NonBlockingInputStream(process.getErrorStream(), 1024)) {
+    try (final NonBlockingInputStream stream = new NonBlockingInputStream(process.getErrorStream(), 1024)) {
       final InputStream stdout = process.getInputStream();
 
       HashTree.Node<ScannerHandler> firstTreeNode = null;
@@ -100,14 +100,19 @@ public final class Expect {
         final ScannerHandler scanner = new ScannerHandler(rule._expect$().text()) {
           @Override
           public void match(final String match) throws IOException {
-            String response = rule._respond$().text();
-            final Map<String,String> variables = callback.rule(rule._id$().text(), rule._expect$().text(), response);
-            response = dereference(response, variables);
-            if (!response.endsWith("\n"))
-              response += "\n";
+            try {
+              String response = rule._respond$().text();
+              final Map<String,String> variables = callback.rule(rule._id$().text(), rule._expect$().text(), response);
+              response = dereference(response, variables);
+              if (!response.endsWith("\n"))
+                response += "\n";
 
-            process.getOutputStream().write(response.getBytes());
-            process.getOutputStream().flush();
+              process.getOutputStream().write(response.getBytes());
+              process.getOutputStream().flush();
+            }
+            catch (final ParseException e) {
+              throw new IOException(e);
+            }
           }
         };
         scannerMap.put(rule._id$().text(), scanner);
@@ -138,13 +143,8 @@ public final class Expect {
     }
   }
 
-  private static String dereference(final String string, final Map<String,String> variables) throws IOException {
-    try {
-      return ELs.dereference(string, variables);
-    }
-    catch (final ExpressionFormatException e) {
-      throw new IOException(e.getMessage());
-    }
+  private static String dereference(final String string, final Map<String,String> variables) throws ParseException {
+    return ELs.dereference(string, variables);
   }
 
   private Expect() {
