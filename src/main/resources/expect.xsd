@@ -16,8 +16,8 @@
 -->
 <xs:schema
   elementFormDefault="qualified"
-  targetNamespace="http://libx4j.org/expect.xsd"
-  xmlns:ex="http://libx4j.org/expect.xsd"
+  targetNamespace="http://lib4j.org/expect.xsd"
+  xmlns:ex="http://lib4j.org/expect.xsd"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
   
   <xs:element name="script">
@@ -51,7 +51,7 @@
     <xs:attribute name="exec" type="xs:string" use="required"/>
     <xs:attribute name="fork" default="async">
       <xs:simpleType>
-        <xs:restriction base="xs:NCName">
+        <xs:restriction base="xs:string">
           <xs:enumeration value="sync"/>
           <xs:enumeration value="async"/>
         </xs:restriction>

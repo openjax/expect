@@ -16,7 +16,6 @@
 
 package org.libx4j.expect;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,6 +132,6 @@ public class ExpectTest {
       }
     };
 
-    Expect.start(System.in, System.out, System.err, callback, new File("src/test/resources/xml/expect.xml"));
+    Expect.start(System.in, System.out, System.err, callback, Thread.currentThread().getContextClassLoader().getResource("expect.xml"));
   }
 }

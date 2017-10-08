@@ -16,11 +16,10 @@
 
 package org.libx4j.expect;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,23 +28,22 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.lib4j.exec.Processes;
+import org.lib4j.expect.ProcessType;
+import org.lib4j.expect.RuleType;
+import org.lib4j.expect.Script;
 import org.lib4j.io.input.NonBlockingInputStream;
 import org.lib4j.io.scanner.InputStreamScanner;
 import org.lib4j.io.scanner.ScannerHandler;
 import org.lib4j.util.ELs;
 import org.lib4j.util.HashTree;
-import org.libx4j.expect.xe.$ex_processType;
-import org.libx4j.expect.xe.$ex_ruleType;
-import org.libx4j.expect.xe.ex_script;
-import org.libx4j.xsb.runtime.Bindings;
-import org.xml.sax.InputSource;
+import org.lib4j.xml.jaxb.JAXBUtil;
 
 public final class Expect {
-  public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final File scriptFile) throws Exception {
-    final ex_script script = (ex_script)Bindings.parse(new InputSource(new FileInputStream(scriptFile)));
+  public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {
+    final Script script = JAXBUtil.parse(Script.class, scriptUrl);
 
-    final $ex_processType processType = script._process(0);
-    final String exec = processType._exec$().text().trim();
+    final ProcessType processType = script.getProcess();
+    final String exec = processType.getExec().trim();
     final Map<String,String> variables = callback.process(exec);
     final Process process;
     final List<String> args = new ArrayList<String>();
@@ -53,7 +51,7 @@ public final class Expect {
     while (tokenizer.hasMoreTokens())
       args.add(tokenizer.nextToken());
 
-    final boolean sync = processType._fork$() != null && $ex_processType._fork$.sync.equals(processType._fork$().text());
+    final boolean sync = processType.getFork() != null && "sync".equals(processType.getFork());
     if (exec.startsWith("java")) {
       String className = null;
       final Map<String,String> props = new HashMap<String,String>();
@@ -93,16 +91,16 @@ public final class Expect {
       final InputStream stdout = process.getInputStream();
 
       HashTree.Node<ScannerHandler> firstTreeNode = null;
-      final List<$ex_ruleType> rules = processType._rule();
+      final List<RuleType> rules = processType.getRule();
       final Map<String,ScannerHandler> scannerMap = new HashMap<String,ScannerHandler>();
       final Map<String,HashTree.Node<ScannerHandler>> treeNodeMap = new HashMap<String,HashTree.Node<ScannerHandler>>();
-      for (final $ex_ruleType rule : rules) {
-        final ScannerHandler scanner = new ScannerHandler(rule._expect$().text()) {
+      for (final RuleType rule : rules) {
+        final ScannerHandler scanner = new ScannerHandler(rule.getExpect()) {
           @Override
           public void match(final String match) throws IOException {
             try {
-              String response = rule._respond$().text();
-              final Map<String,String> variables = callback.rule(rule._id$().text(), rule._expect$().text(), response);
+              String response = rule.getRespond();
+              final Map<String,String> variables = callback.rule(rule.getId(), rule.getExpect(), response);
               response = dereference(response, variables);
               if (!response.endsWith("\n"))
                 response += "\n";
@@ -115,23 +113,22 @@ public final class Expect {
             }
           }
         };
-        scannerMap.put(rule._id$().text(), scanner);
+        scannerMap.put(rule.getId(), scanner);
 
         final HashTree.Node<ScannerHandler> treeNode = new HashTree.Node<ScannerHandler>(scanner);
-        treeNodeMap.put(rule._id$().text(), treeNode);
+        treeNodeMap.put(rule.getId(), treeNode);
         if (firstTreeNode == null)
           firstTreeNode = treeNode;
       }
 
-      final List<$ex_processType._tree._node> nodes = processType._tree(0)._node();
-      for (final $ex_processType._tree._node node : nodes) {
-        final HashTree.Node<ScannerHandler> treeNode = treeNodeMap.get(node._rule$().text());
-        final $ex_processType._tree._node._children$ children = node._children$();
+      final List<ProcessType.Tree.Node> nodes = processType.getTree().getNode();
+      for (final ProcessType.Tree.Node node : nodes) {
+        final HashTree.Node<ScannerHandler> treeNode = treeNodeMap.get(node.getRule());
+        final List<Object> children = node.getChildren();
         if (children == null)
           continue;
 
-        final List<String> childIds = children.text();
-        for (final String childId : childIds)
+        for (final Object childId : children)
           treeNode.addChild(treeNodeMap.get(childId));
       }
 
