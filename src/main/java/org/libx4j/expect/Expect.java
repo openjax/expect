@@ -36,11 +36,11 @@ import org.lib4j.io.scanner.InputStreamScanner;
 import org.lib4j.io.scanner.ScannerHandler;
 import org.lib4j.util.ELs;
 import org.lib4j.util.HashTree;
-import org.lib4j.xml.jaxb.JAXBUtil;
+import org.lib4j.xml.jaxb.JaxbUtil;
 
 public final class Expect {
   public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {
-    final Script script = JAXBUtil.parse(Script.class, scriptUrl);
+    final Script script = JaxbUtil.parse(Script.class, scriptUrl);
 
     final ProcessType processType = script.getProcess();
     final String exec = processType.getExec().trim();

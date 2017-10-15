@@ -44,9 +44,10 @@
         <groupId>org.lib4j.maven.plugin</groupId>
         <artifactId>xjc-maven-plugin</artifactId>
         <configuration>
-          <sources>
-            <source>src/main/resources/expect.xsd</source>
-          </sources>
+          <destDir>${project.build.directory}/generated-sources/jaxb</destDir>
+          <resources>
+            <resource>src/main/resources/expect.xsd</resource>
+          </resources>
         </configuration>
       </plugin>
     </plugins>
