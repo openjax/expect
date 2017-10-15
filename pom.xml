@@ -45,9 +45,9 @@
         <artifactId>xjc-maven-plugin</artifactId>
         <configuration>
           <destDir>${project.build.directory}/generated-sources/jaxb</destDir>
-          <resources>
-            <resource>src/main/resources/expect.xsd</resource>
-          </resources>
+          <schemas>
+            <schema>src/main/resources/expect.xsd</schema>
+          </schemas>
         </configuration>
       </plugin>
     </plugins>
