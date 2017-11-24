@@ -28,9 +28,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.lib4j.exec.Processes;
-import org.lib4j.expect.ProcessType;
-import org.lib4j.expect.RuleType;
-import org.lib4j.expect.Script;
+import org.lib4j.expect_0_2_11.ProcessType;
+import org.lib4j.expect_0_2_11.RuleType;
+import org.lib4j.expect_0_2_11.Script;
 import org.lib4j.io.input.NonBlockingInputStream;
 import org.lib4j.io.scanner.InputStreamScanner;
 import org.lib4j.io.scanner.ScannerHandler;

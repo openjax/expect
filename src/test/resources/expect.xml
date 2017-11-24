@@ -15,7 +15,7 @@
   program. If not, see <http://opensource.org/licenses/MIT/>.
 -->
 <ex:script
-  xmlns:ex="http://lib4j.org/expect.xsd"
+  xmlns:ex="http://lib4j.org/expect-0.2.11.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://lib4j.org/expect.xsd ../../main/resources/expect.xsd">
   <ex:process exec="java org.safris.commons.expect.ExpectSimulator ${date}">
