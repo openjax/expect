@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,19 +97,14 @@ public final class Expect {
         final ScannerHandler scanner = new ScannerHandler(rule.getExpect()) {
           @Override
           public void match(final String match) throws IOException {
-            try {
-              String response = rule.getRespond();
-              final Map<String,String> variables = callback.rule(rule.getId(), rule.getExpect(), response);
-              response = dereference(response, variables);
-              if (!response.endsWith("\n"))
-                response += "\n";
+            String response = rule.getRespond();
+            final Map<String,String> variables = callback.rule(rule.getId(), rule.getExpect(), response);
+            response = dereference(response, variables);
+            if (!response.endsWith("\n"))
+              response += "\n";
 
-              process.getOutputStream().write(response.getBytes());
-              process.getOutputStream().flush();
-            }
-            catch (final ParseException e) {
-              throw new IOException(e);
-            }
+            process.getOutputStream().write(response.getBytes());
+            process.getOutputStream().flush();
           }
         };
         scannerMap.put(rule.getId(), scanner);
@@ -140,8 +134,8 @@ public final class Expect {
     }
   }
 
-  private static String dereference(final String string, final Map<String,String> variables) throws ParseException {
-    return ELs.dereference(string, variables);
+  private static String dereference(final String string, final Map<String,String> variables) {
+    return ELs.deref(string, variables);
   }
 
   private Expect() {
