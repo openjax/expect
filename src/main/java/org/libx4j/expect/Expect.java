@@ -34,10 +34,10 @@ import org.lib4j.io.input.NonBlockingInputStream;
 import org.lib4j.io.scanner.InputStreamScanner;
 import org.lib4j.io.scanner.ScannerHandler;
 import org.lib4j.util.ELs;
-import org.lib4j.util.HashTree;
+import org.lib4j.util.ListTree;
 import org.lib4j.xml.jaxb.JaxbUtil;
 
-public final class Expect {
+public class Expect {
   public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {
     final Script script = JaxbUtil.parse(Script.class, scriptUrl);
 
@@ -55,20 +55,20 @@ public final class Expect {
       String className = null;
       final Map<String,String> props = new HashMap<String,String>();
       final List<String> javaArgs = new ArrayList<String>();
-      for (String arg : args) {
+      for (final String arg : args) {
         if (arg.startsWith("-D")) {
-          arg = arg.substring(2);
-          final String[] split = arg.split("=", 2);
-          props.put(split[0], split[1]);
+          final String[] parts = arg.substring(2).split("=", 2);
+          props.put(parts[0], parts[1]);
         }
         else if (arg.matches("([_a-zA-Z0-9]+\\.)+[_a-zA-Z0-9]+")) {
           if (className != null)
-            throw new UnknownError("There is a problem with the regex used to determine the final class name. We have matched it twice!!");
+            throw new IllegalArgumentException("There is a problem with the regex used to determine the final class name. We have matched it twice!!");
 
           className = arg;
         }
-        else if (!"java".equals(arg))
+        else if (!"java".equals(arg)) {
           javaArgs.add(arg);
+        }
       }
 
       if (sync)
@@ -89,14 +89,14 @@ public final class Expect {
     try (final NonBlockingInputStream stream = new NonBlockingInputStream(process.getErrorStream(), 1024)) {
       final InputStream stdout = process.getInputStream();
 
-      HashTree.Node<ScannerHandler> firstTreeNode = null;
+      ListTree.Node<ScannerHandler> firstTreeNode = null;
       final List<RuleType> rules = processType.getRule();
       final Map<String,ScannerHandler> scannerMap = new HashMap<String,ScannerHandler>();
-      final Map<String,HashTree.Node<ScannerHandler>> treeNodeMap = new HashMap<String,HashTree.Node<ScannerHandler>>();
+      final Map<String,ListTree.Node<ScannerHandler>> treeNodeMap = new HashMap<String,ListTree.Node<ScannerHandler>>();
       for (final RuleType rule : rules) {
         final ScannerHandler scanner = new ScannerHandler(rule.getExpect()) {
           @Override
-          public void match(final String match) throws IOException {
+          public void match(final String pattern) throws IOException {
             String response = rule.getRespond();
             final Map<String,String> variables = callback.rule(rule.getId(), rule.getExpect(), response);
             response = dereference(response, variables);
@@ -109,7 +109,7 @@ public final class Expect {
         };
         scannerMap.put(rule.getId(), scanner);
 
-        final HashTree.Node<ScannerHandler> treeNode = new HashTree.Node<ScannerHandler>(scanner);
+        final ListTree.Node<ScannerHandler> treeNode = new ListTree.Node<ScannerHandler>(scanner);
         treeNodeMap.put(rule.getId(), treeNode);
         if (firstTreeNode == null)
           firstTreeNode = treeNode;
@@ -117,16 +117,16 @@ public final class Expect {
 
       final List<ProcessType.Tree.Node> nodes = processType.getTree().getNode();
       for (final ProcessType.Tree.Node node : nodes) {
-        final HashTree.Node<ScannerHandler> treeNode = treeNodeMap.get(node.getRule());
+        final ListTree.Node<ScannerHandler> treeNode = treeNodeMap.get((String)node.getRule());
         final List<Object> children = node.getChildren();
         if (children == null)
           continue;
 
         for (final Object childId : children)
-          treeNode.addChild(treeNodeMap.get(childId));
+          treeNode.addChild(treeNodeMap.get((String)childId));
       }
 
-      final HashTree<ScannerHandler> tree = new HashTree<ScannerHandler>();
+      final ListTree<ScannerHandler> tree = new ListTree<ScannerHandler>();
       tree.addChild(firstTreeNode);
 
       final InputStreamScanner scanner = new InputStreamScanner(stdout, tree);
