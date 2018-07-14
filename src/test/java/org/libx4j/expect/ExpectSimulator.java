@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public final class ExpectSimulator {
-  private static List<Prompt> prompts = new ArrayList<Prompt>();
+  private static List<Prompt> prompts = new ArrayList<>();
 
   private static final class Prompt {
-    private List<String> answers = new ArrayList<String>();
+    private List<String> answers = new ArrayList<>();
     private final String prompt;
     private final String matchLeft;
     private Prompt left;

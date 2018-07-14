@@ -28,7 +28,7 @@ public class ExpectTest {
   @Ignore("FIXME")
   public void testStart() throws Exception {
     final ExpectCallback callback = new ExpectCallback() {
-      private final Map<String,String> variables = new HashMap<String,String>();
+      private final Map<String,String> variables = new HashMap<>();
       private int index = -1;
 
       @Override

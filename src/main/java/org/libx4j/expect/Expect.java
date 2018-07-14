@@ -45,7 +45,7 @@ public class Expect {
     final String exec = processType.getExec().trim();
     final Map<String,String> variables = callback.process(exec);
     final Process process;
-    final List<String> args = new ArrayList<String>();
+    final List<String> args = new ArrayList<>();
     final StringTokenizer tokenizer = new StringTokenizer(dereference(exec, variables));
     while (tokenizer.hasMoreTokens())
       args.add(tokenizer.nextToken());
@@ -53,8 +53,8 @@ public class Expect {
     final boolean sync = processType.getFork() != null && "sync".equals(processType.getFork());
     if (exec.startsWith("java")) {
       String className = null;
-      final Map<String,String> props = new HashMap<String,String>();
-      final List<String> javaArgs = new ArrayList<String>();
+      final Map<String,String> props = new HashMap<>();
+      final List<String> javaArgs = new ArrayList<>();
       for (final String arg : args) {
         if (arg.startsWith("-D")) {
           final String[] parts = arg.substring(2).split("=", 2);
@@ -91,8 +91,8 @@ public class Expect {
 
       ListTree.Node<ScannerHandler> firstTreeNode = null;
       final List<RuleType> rules = processType.getRule();
-      final Map<String,ScannerHandler> scannerMap = new HashMap<String,ScannerHandler>();
-      final Map<String,ListTree.Node<ScannerHandler>> treeNodeMap = new HashMap<String,ListTree.Node<ScannerHandler>>();
+      final Map<String,ScannerHandler> scannerMap = new HashMap<>();
+      final Map<String,ListTree.Node<ScannerHandler>> treeNodeMap = new HashMap<>();
       for (final RuleType rule : rules) {
         final ScannerHandler scanner = new ScannerHandler(rule.getExpect()) {
           @Override
@@ -109,7 +109,7 @@ public class Expect {
         };
         scannerMap.put(rule.getId(), scanner);
 
-        final ListTree.Node<ScannerHandler> treeNode = new ListTree.Node<ScannerHandler>(scanner);
+        final ListTree.Node<ScannerHandler> treeNode = new ListTree.Node<>(scanner);
         treeNodeMap.put(rule.getId(), treeNode);
         if (firstTreeNode == null)
           firstTreeNode = treeNode;
@@ -126,7 +126,7 @@ public class Expect {
           treeNode.addChild(treeNodeMap.get((String)childId));
       }
 
-      final ListTree<ScannerHandler> tree = new ListTree<ScannerHandler>();
+      final ListTree<ScannerHandler> tree = new ListTree<>();
       tree.addChild(firstTreeNode);
 
       final InputStreamScanner scanner = new InputStreamScanner(stdout, tree);
