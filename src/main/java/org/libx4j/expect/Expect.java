@@ -33,7 +33,7 @@ import org.lib4j.io.NonBlockingInputStream;
 import org.fastjax.exec.Processes;
 import org.fastjax.util.ELs;
 import org.fastjax.util.ListTree;
-import org.lib4j.xml.jaxb.JaxbUtil;
+import org.fastjax.xml.jaxb.JaxbUtil;
 
 public class Expect {
   public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {
