@@ -31,8 +31,8 @@ import org.lib4j.expect_0_2_12.ProcessType;
 import org.lib4j.expect_0_2_12.RuleType;
 import org.lib4j.expect_0_2_12.Script;
 import org.lib4j.io.NonBlockingInputStream;
-import org.lib4j.util.ELs;
-import org.lib4j.util.ListTree;
+import org.fastjax.util.ELs;
+import org.fastjax.util.ListTree;
 import org.lib4j.xml.jaxb.JaxbUtil;
 
 public class Expect {
