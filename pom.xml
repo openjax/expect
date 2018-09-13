@@ -41,7 +41,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.lib4j.maven.plugin</groupId>
+        <groupId>org.fastjax.maven.plugin</groupId>
         <artifactId>xjc-maven-plugin</artifactId>
         <configuration>
           <destDir>${project.build.directory}/generated-sources/jaxb</destDir>
