@@ -50,6 +50,10 @@
           </schemas>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.fastjax.maven.plugin</groupId>
+        <artifactId>xml-maven-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
