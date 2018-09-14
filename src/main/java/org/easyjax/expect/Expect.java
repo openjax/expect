@@ -26,11 +26,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.lib4j.expect_0_2_12.ProcessType;
-import org.lib4j.expect_0_2_12.RuleType;
-import org.lib4j.expect_0_2_12.Script;
-import org.fastjax.io.NonBlockingInputStream;
+import org.easyjax.expect_0_2_12.ProcessType;
+import org.easyjax.expect_0_2_12.RuleType;
+import org.easyjax.expect_0_2_12.Script;
 import org.fastjax.exec.Processes;
+import org.fastjax.io.NonBlockingInputStream;
 import org.fastjax.util.ELs;
 import org.fastjax.util.ListTree;
 import org.fastjax.xml.jaxb.JaxbUtil;
