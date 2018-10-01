@@ -31,6 +31,7 @@ import org.easyjax.expect_0_2_12.RuleType;
 import org.easyjax.expect_0_2_12.Script;
 import org.fastjax.exec.Processes;
 import org.fastjax.io.NonBlockingInputStream;
+import org.fastjax.util.ClassLoaders;
 import org.fastjax.util.ELs;
 import org.fastjax.util.ListTree;
 import org.fastjax.xml.jaxb.JaxbUtil;
@@ -69,16 +70,14 @@ public class Expect {
         }
       }
 
+      process = Processes.forkAsync(in, out, err, false, ClassLoaders.getClassPath(), null, props, Class.forName(className), javaArgs.toArray(new String[javaArgs.size()]));
       if (sync)
-        process = Processes.forkSync(in, out, err, false, props, Class.forName(className), javaArgs.toArray(new String[javaArgs.size()]));
-      else
-        process = Processes.forkAsync(in, out, err, false, props, Class.forName(className), javaArgs.toArray(new String[javaArgs.size()]));
+        process.waitFor();
     }
     else {
+      process = Processes.forkAsync(in, out, err, false, args.toArray(new String[args.size()]));
       if (sync)
-        process = Processes.forkSync(in, out, err, false, new String[args.size()]);
-      else
-        process = Processes.forkAsync(in, out, err, false, args.toArray(new String[args.size()]));
+        process.waitFor();
     }
 
     // This is important: since we are not reading from STDERR, we must start a NonBlockingInputStream
