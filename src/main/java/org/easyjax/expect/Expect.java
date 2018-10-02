@@ -70,12 +70,12 @@ public class Expect {
         }
       }
 
-      process = Processes.forkAsync(in, out, err, false, ClassLoaders.getClassPath(), null, props, Class.forName(className), javaArgs.toArray(new String[javaArgs.size()]));
+      process = Processes.forkAsync(in, out, err, false, null, null, ClassLoaders.getClassPath(), null, props, Class.forName(className), javaArgs.toArray(new String[javaArgs.size()]));
       if (sync)
         process.waitFor();
     }
     else {
-      process = Processes.forkAsync(in, out, err, false, args.toArray(new String[args.size()]));
+      process = Processes.forkAsync(in, out, err, false, null, null, args.toArray(new String[args.size()]));
       if (sync)
         process.waitFor();
     }
