@@ -30,7 +30,6 @@ import org.easyjax.expect_0_2_12.ProcessType;
 import org.easyjax.expect_0_2_12.RuleType;
 import org.easyjax.expect_0_2_12.Script;
 import org.fastjax.exec.Processes;
-import org.fastjax.io.NonBlockingInputStream;
 import org.fastjax.util.ClassLoaders;
 import org.fastjax.util.ELs;
 import org.fastjax.util.ListTree;
