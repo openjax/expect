@@ -32,7 +32,6 @@ import org.easyjax.expect_0_2_12.Script;
 import org.fastjax.exec.Processes;
 import org.fastjax.util.ClassLoaders;
 import org.fastjax.util.ELs;
-import org.fastjax.util.ListTree;
 import org.fastjax.xml.jaxb.JaxbUtil;
 
 public class Expect {

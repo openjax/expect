@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.fastjax.util.ListTree;
-
 public class InputStreamScanner extends Thread {
   private final InputStream in;
   private List<ListTree.Node<ScannerHandler>> currentNodes;
