@@ -38,6 +38,13 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <sourcepath>${project.build.directory}/generated-sources/jaxb</sourcepath>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.fastjax.jaxb</groupId>
         <artifactId>jaxb-maven-plugin</artifactId>
         <configuration>
@@ -50,13 +57,6 @@
       <plugin>
         <groupId>org.fastjax.xml</groupId>
         <artifactId>xml-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <sourcepath>${project.build.directory}/generated-sources/jaxb</sourcepath>
-        </configuration>
       </plugin>
     </plugins>
   </build>
