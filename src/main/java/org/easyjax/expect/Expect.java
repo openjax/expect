@@ -31,7 +31,7 @@ import org.easyjax.expect_0_2_12.RuleType;
 import org.easyjax.expect_0_2_12.Script;
 import org.fastjax.exec.Processes;
 import org.fastjax.util.ClassLoaders;
-import org.fastjax.util.ELs;
+import org.fastjax.util.Strings;
 import org.fastjax.xml.jaxb.JaxbUtil;
 
 public class Expect {
@@ -130,7 +130,7 @@ public class Expect {
   }
 
   private static String dereference(final String string, final Map<String,String> variables) {
-    return ELs.deref(string, variables);
+    return Strings.derefEL(string, variables);
   }
 
   private Expect() {
