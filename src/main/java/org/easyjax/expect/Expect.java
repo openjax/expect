@@ -32,7 +32,7 @@ import org.easyjax.expect_0_2_12.Script;
 import org.fastjax.exec.Processes;
 import org.fastjax.util.ClassLoaders;
 import org.fastjax.util.Strings;
-import org.fastjax.xml.jaxb.JaxbUtil;
+import org.fastjax.jaxb.JaxbUtil;
 
 public class Expect {
   public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {
@@ -41,12 +41,12 @@ public class Expect {
     final ProcessType processType = script.getProcess();
     final String exec = processType.getExec().trim();
     final Map<String,String> variables = callback.process(exec);
-    final Process process;
     final List<String> args = new ArrayList<>();
     final StringTokenizer tokenizer = new StringTokenizer(dereference(exec, variables));
     while (tokenizer.hasMoreTokens())
       args.add(tokenizer.nextToken());
 
+    final Process process;
     final boolean sync = processType.getFork() != null && "sync".equals(processType.getFork());
     if (exec.startsWith("java")) {
       String className = null;
