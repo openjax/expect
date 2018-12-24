@@ -70,7 +70,7 @@ public class InputStreamScanner extends Thread {
       if ("Pipe broken".equals(e.getMessage()))
         return;
 
-      throw new RuntimeException(e);
+      throw new IllegalStateException(e);
     }
     finally {
       synchronized (this) {
