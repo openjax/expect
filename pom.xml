@@ -32,9 +32,6 @@
     passwd, fsck, rlogin, tip, etc. With this library you can wrap interactive
     applications in any java code.
   </description>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
   <build>
     <plugins>
       <plugin>
