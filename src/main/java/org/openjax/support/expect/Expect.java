@@ -1,4 +1,4 @@
-/* Copyright (c) 2008 EasyJAX
+/* Copyright (c) 2008 OpenJAX
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,7 +14,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.easyjax.expect;
+package org.openjax.support.expect;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,13 +26,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.easyjax.expect_0_2_12.ProcessType;
-import org.easyjax.expect_0_2_12.RuleType;
-import org.easyjax.expect_0_2_12.Script;
-import org.fastjax.exec.Processes;
-import org.fastjax.util.ClassLoaders;
-import org.fastjax.util.Strings;
-import org.fastjax.jaxb.JaxbUtil;
+import org.openjax.classic.exec.Processes;
+import org.openjax.classic.jaxb.xjc.JaxbUtil;
+import org.openjax.classic.util.ClassLoaders;
+import org.openjax.classic.util.Strings;
+import org.openjax.support.expect_0_2_12.ProcessType;
+import org.openjax.support.expect_0_2_12.RuleType;
+import org.openjax.support.expect_0_2_12.Script;
 
 public class Expect {
   public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {

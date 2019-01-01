@@ -1,33 +1,24 @@
-/* Copyright (c) 2006 EasyJAX
- *
+/* Copyright (c) 2008 OpenJAX
+ * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * 
  * You should have received a copy of The MIT License (MIT) along with this
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.easyjax.expect;
+package org.openjax.support.expect;
 
-import java.io.IOException;
+import java.util.Map;
 
-public abstract class ScannerHandler {
-  private final String pattern;
-
-  public ScannerHandler(final String pattern) {
-    this.pattern = pattern;
-  }
-
-  public String getPattern() {
-    return pattern;
-  }
-
-  public abstract void match(final String pattern) throws IOException;
+public abstract class ExpectCallback {
+  public abstract Map<String,String> process(final String exec);
+  public abstract Map<String,String> rule(final String ruleId, final String prompt, final String response);
 }
