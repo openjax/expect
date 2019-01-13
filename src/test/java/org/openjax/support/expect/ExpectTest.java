@@ -24,7 +24,6 @@ import org.junit.Test;
 
 public class ExpectTest {
   @Test
-  // FIXME
   @Ignore("FIXME")
   public void testStart() throws Exception {
     final ExpectCallback callback = new ExpectCallback() {
@@ -38,7 +37,7 @@ public class ExpectTest {
       }
 
       @Override
-      public Map<String,String> rule(final String ruleId, final String prompt, final String response) {
+      public Map<String,String> rule(final String ruleId, final String prompt, final String response, final String line) {
         if (!"r2".equals(ruleId))
           return variables;
 

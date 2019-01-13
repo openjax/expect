@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.openjax.standard.exec.Processes;
 import org.openjax.standard.jaxb.xjc.JaxbUtil;
@@ -42,9 +41,38 @@ public class Expect {
     final String exec = processType.getExec().trim();
     final Map<String,String> variables = callback.process(exec);
     final List<String> args = new ArrayList<>();
-    final StringTokenizer tokenizer = new StringTokenizer(dereference(exec, variables));
-    while (tokenizer.hasMoreTokens())
-      args.add(tokenizer.nextToken());
+
+    final String command = dereference(exec, variables);
+    int end = -1;
+
+    while (end < command.length()) {
+      int start = command.indexOf(" ", end + 1);
+      if (start == -1)
+        start = command.length();
+
+      if (end + 1 == start) {
+        end = start;
+        continue;
+      }
+
+      String arg = command.substring(end + 1, start);
+      int i = 0;
+      for (; i < arg.length(); ++i)
+        if (!Character.isWhitespace(arg.charAt(i)))
+          break;
+
+      if (arg.startsWith("\"")) {
+        start = Strings.indexOfUnQuoted(command, '"', start + 2 + i);
+        arg = command.substring(end + 2, start);
+      }
+      else if (arg.startsWith("'")) {
+        start = Strings.indexOfUnQuoted(command, '\'', start + 2 + i);
+        arg = command.substring(end + 2, start);
+      }
+
+      args.add(arg.trim());
+      end = start;
+    }
 
     final Process process;
     final boolean sync = processType.getFork() != null && "sync".equals(processType.getFork());
@@ -69,13 +97,9 @@ public class Expect {
       }
 
       process = Processes.forkAsync(in, out, err, false, null, null, ClassLoaders.getClassPath(), null, props, Class.forName(className), javaArgs.toArray(new String[javaArgs.size()]));
-      if (sync)
-        process.waitFor();
     }
     else {
       process = Processes.forkAsync(in, out, err, false, null, null, args.toArray(new String[args.size()]));
-      if (sync)
-        process.waitFor();
     }
 
     // This is important: since we are not reading from STDERR, we must start a NonBlockingInputStream
@@ -91,15 +115,18 @@ public class Expect {
       for (final RuleType rule : rules) {
         final ScannerHandler scanner = new ScannerHandler(rule.getExpect()) {
           @Override
-          public void match(final String pattern) throws IOException {
-            String response = rule.getRespond();
-            final Map<String,String> variables = callback.rule(rule.getId(), rule.getExpect(), response);
-            response = dereference(response, variables);
-            if (!response.endsWith("\n"))
-              response += "\n";
+          public void match(final String line) throws IOException {
+            try {
+              String response = rule.getRespond();
+              final Map<String,String> variables = callback.rule(rule.getId(), rule.getExpect(), response, line);
+              response = dereference(response, variables);
 
-            process.getOutputStream().write(response.getBytes());
-            process.getOutputStream().flush();
+              process.getOutputStream().write(response.getBytes());
+              process.getOutputStream().flush();
+            }
+            catch (final InterruptedException e) {
+              process.destroy();
+            }
           }
         };
         scannerMap.put(rule.getId(), scanner);
@@ -112,13 +139,13 @@ public class Expect {
 
       final List<ProcessType.Tree.Node> nodes = processType.getTree().getNode();
       for (final ProcessType.Tree.Node node : nodes) {
-        final ListTree.Node<ScannerHandler> treeNode = treeNodeMap.get((String)node.getRule());
+        final ListTree.Node<ScannerHandler> treeNode = treeNodeMap.get(((RuleType)node.getRule()).getId());
         final List<Object> children = node.getChildren();
         if (children == null)
           continue;
 
         for (final Object childId : children)
-          treeNode.addChild(treeNodeMap.get((String)childId));
+          treeNode.addChild(treeNodeMap.get(((RuleType)childId).getId()));
       }
 
       final ListTree<ScannerHandler> tree = new ListTree<>();
@@ -127,6 +154,9 @@ public class Expect {
       final InputStreamScanner scanner = new InputStreamScanner(stdout, tree);
       scanner.start();
     }
+
+    if (sync)
+      process.waitFor();
   }
 
   private static String dereference(final String string, final Map<String,String> variables) {

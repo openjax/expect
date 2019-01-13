@@ -40,8 +40,7 @@ public class InputStreamScanner extends Thread {
       else if (line.matches(node.getValue().getPattern())) {
         match = true;
         node.getValue().match(line);
-        if (node.hasChildren())
-          currentNodes = node.getChildren();
+        currentNodes = node.getChildren();
       }
     }
 
@@ -62,8 +61,12 @@ public class InputStreamScanner extends Thread {
         if (currentNodes == null)
           continue;
 
-        if (onMatch(builder.toString(), currentNodes))
+        if (onMatch(builder.toString(), currentNodes)) {
+          if (currentNodes == null)
+            return;
+
           builder.setLength(0);
+        }
       }
     }
     catch (final Exception e) {

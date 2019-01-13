@@ -17,8 +17,8 @@
 <ex:script
   xmlns:ex="http://support.openjax.org/expect-0.2.12.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://support.openjax.org/expect-0.2.12.xsd ../../main/resources/expect.xsd">
-  <ex:process exec="java org.safris.commons.expect.ExpectSimulator ${date}">
+  xsi:schemaLocation="http://support.openjax.org/expect-0.2.12.xsd http://support.openjax.org/expect.xsd">
+  <ex:process exec="java org.openjax.support.expect.ExpectSimulator ${date}" fork="sync">
     <ex:rule id="r1" expect="Would you like to create a roster\?" respond="Y"/>
     <ex:rule id="r2" expect="What is the name of the person\?" respond="${name}"/>
     <ex:rule id="r3" expect="Is [\$\{\}a-zA-Z]+ an adult or a child\?" respond="${adultOrChild}"/>
