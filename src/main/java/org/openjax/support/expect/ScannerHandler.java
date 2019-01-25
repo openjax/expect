@@ -29,5 +29,5 @@ public abstract class ScannerHandler {
     return pattern;
   }
 
-  public abstract void match(final String pattern) throws IOException;
+  public abstract void match(String pattern) throws IOException;
 }
