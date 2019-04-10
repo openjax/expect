@@ -131,6 +131,6 @@ public class ExpectTest {
       }
     };
 
-    Expect.start(System.in, System.out, System.err, callback, Thread.currentThread().getContextClassLoader().getResource("expect.xml"));
+    Expect.start(System.in, System.out, System.err, callback, ClassLoader.getSystemClassLoader().getResource("expect.xml"));
   }
 }
