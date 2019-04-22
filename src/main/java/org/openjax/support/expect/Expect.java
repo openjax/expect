@@ -46,7 +46,7 @@ public class Expect {
     int end = -1;
 
     while (end < command.length()) {
-      int start = command.indexOf(" ", end + 1);
+      int start = command.indexOf(' ', end + 1);
       if (start == -1)
         start = command.length();
 
