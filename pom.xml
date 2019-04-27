@@ -35,7 +35,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.openjax.standard.jaxb</groupId>
+        <groupId>org.openjax.ext.jaxb</groupId>
         <artifactId>jaxb-maven-plugin</artifactId>
         <configuration>
           <destDir>${project.build.directory}/generated-sources/jaxb</destDir>
@@ -45,19 +45,19 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.openjax.standard.xml</groupId>
+        <groupId>org.openjax.ext.xml</groupId>
         <artifactId>xml-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
   <dependencies>
     <dependency>
-      <groupId>org.openjax.standard</groupId>
+      <groupId>org.openjax.ext</groupId>
       <artifactId>exec</artifactId>
       <version>0.8.9-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.openjax.standard.jaxb</groupId>
+      <groupId>org.openjax.ext.jaxb</groupId>
       <artifactId>xjc</artifactId>
       <version>0.8.1-SNAPSHOT</version>
     </dependency>
