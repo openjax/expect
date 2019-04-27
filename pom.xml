@@ -35,13 +35,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.safris.maven</groupId>
-        <artifactId>offlinejavadoc-maven-plugin</artifactId>
-        <configuration>
-          <sourcepath>${project.build.directory}/generated-sources/jaxb</sourcepath>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.openjax.standard.jaxb</groupId>
         <artifactId>jaxb-maven-plugin</artifactId>
         <configuration>
