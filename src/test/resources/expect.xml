@@ -15,10 +15,10 @@
   program. If not, see <http://opensource.org/licenses/MIT/>.
 -->
 <ex:script
-  xmlns:ex="http://std.openjax.org/expect-0.2.12.xsd"
+  xmlns:ex="http://ext.openjax.org/expect-0.2.12.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://std.openjax.org/expect-0.2.12.xsd http://std.openjax.org/expect.xsd">
-  <ex:process exec="java org.openjax.std.expect.ExpectSimulator ${date}" fork="sync">
+  xsi:schemaLocation="http://ext.openjax.org/expect-0.2.12.xsd http://ext.openjax.org/expect.xsd">
+  <ex:process exec="java org.openjax.ext.expect.ExpectSimulator ${date}" fork="sync">
     <ex:rule id="r1" expect="Would you like to create a roster\?" respond="Y"/>
     <ex:rule id="r2" expect="What is the name of the person\?" respond="${name}"/>
     <ex:rule id="r3" expect="Is [\$\{\}a-zA-Z]+ an adult or a child\?" respond="${adultOrChild}"/>

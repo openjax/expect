@@ -14,7 +14,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.openjax.std.expect;
+package org.openjax.ext.expect;
 
 import java.util.HashMap;
 import java.util.Map;
