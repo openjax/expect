@@ -16,8 +16,8 @@
 -->
 <xs:schema
   elementFormDefault="qualified"
-  targetNamespace="http://support.openjax.org/expect-0.2.12.xsd"
-  xmlns:ex="http://support.openjax.org/expect-0.2.12.xsd"
+  targetNamespace="http://std.openjax.org/expect-0.2.12.xsd"
+  xmlns:ex="http://std.openjax.org/expect-0.2.12.xsd"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
   
   <xs:element name="script">

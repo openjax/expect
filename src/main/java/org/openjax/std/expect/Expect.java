@@ -14,7 +14,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.openjax.support.expect;
+package org.openjax.std.expect;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,9 +29,9 @@ import org.openjax.ext.exec.Processes;
 import org.openjax.ext.jaxb.xjc.JaxbUtil;
 import org.openjax.ext.util.ClassLoaders;
 import org.openjax.ext.util.Strings;
-import org.openjax.support.expect_0_2_12.ProcessType;
-import org.openjax.support.expect_0_2_12.RuleType;
-import org.openjax.support.expect_0_2_12.Script;
+import org.openjax.std.expect_0_2_12.ProcessType;
+import org.openjax.std.expect_0_2_12.RuleType;
+import org.openjax.std.expect_0_2_12.Script;
 
 public class Expect {
   public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {

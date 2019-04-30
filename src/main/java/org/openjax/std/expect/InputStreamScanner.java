@@ -14,7 +14,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.openjax.support.expect;
+package org.openjax.std.expect;
 
 import java.io.IOException;
 import java.io.InputStream;
