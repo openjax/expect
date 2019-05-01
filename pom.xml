@@ -26,7 +26,7 @@
   </parent>
   <artifactId>expect</artifactId>
   <version>0.2.12-SNAPSHOT</version>
-  <name>${project.groupId}:${project.artifactId}</name>
+  <name>OpenJAX Extensions Expect</name>
   <description>
     Module for the automation of interactive applications such as telnet, ftp,
     passwd, fsck, rlogin, tip, etc. With this library you can wrap interactive
