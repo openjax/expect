@@ -1,4 +1,4 @@
-/* Copyright (c) 2008 OpenJAX
+/* Copyright (c) 2006 OpenJAX
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -14,11 +14,20 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.openjax.ext.expect;
+package org.openjax.expect;
 
-import java.util.Map;
+import java.io.IOException;
 
-public interface ExpectCallback {
-  Map<String,String> process(String exec);
-  Map<String,String> rule(String ruleId, String prompt, String response, String line) throws InterruptedException;
+public abstract class ScannerHandler {
+  private final String pattern;
+
+  public ScannerHandler(final String pattern) {
+    this.pattern = pattern;
+  }
+
+  public String getPattern() {
+    return pattern;
+  }
+
+  public abstract void match(String pattern) throws IOException;
 }

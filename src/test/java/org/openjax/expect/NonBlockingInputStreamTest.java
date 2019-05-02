@@ -14,7 +14,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.
  */
 
-package org.openjax.ext.expect;
+package org.openjax.expect;
 
 import static org.junit.Assert.*;
 
