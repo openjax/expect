@@ -25,10 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openjax.exec.Processes;
 import org.openjax.jaxb.xjc.JaxbUtil;
-import org.openjax.util.ClassLoaders;
-import org.openjax.util.Strings;
+import org.libj.util.ClassLoaders;
+import org.libj.util.Strings;
+import org.libj.exec.Processes;
 import org.openjax.expect_0_2_12.ProcessType;
 import org.openjax.expect_0_2_12.RuleType;
 import org.openjax.expect_0_2_12.Script;

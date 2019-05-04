@@ -52,7 +52,7 @@
   </build>
   <dependencies>
     <dependency>
-      <groupId>org.openjax</groupId>
+      <groupId>org.libj</groupId>
       <artifactId>exec</artifactId>
       <version>0.8.9-SNAPSHOT</version>
     </dependency>
