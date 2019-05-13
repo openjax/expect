@@ -1,7 +1,5 @@
 # OpenJAX Expect
 
-> Automation of interactive applications.
-
 [![Build Status](https://travis-ci.org/openjax/expect.png)](https://travis-ci.org/openjax/expect)
 [![Coverage Status](https://coveralls.io/repos/github/openjax/expect/badge.svg)](https://coveralls.io/github/openjax/expect)
 [![Javadocs](https://www.javadoc.io/badge/org.openjax/expect.svg)](https://www.javadoc.io/doc/org.openjax/expect)
