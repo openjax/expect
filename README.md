@@ -1,4 +1,4 @@
-# OpenJAX Expect
+# Expect
 
 [![Build Status](https://travis-ci.org/openjax/expect.png)](https://travis-ci.org/openjax/expect)
 [![Coverage Status](https://coveralls.io/repos/github/openjax/expect/badge.svg)](https://coveralls.io/github/openjax/expect)
