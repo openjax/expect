@@ -1,9 +1,9 @@
 # Expect
 
-[![Build Status](https://travis-ci.org/openjax/expect.png)](https://travis-ci.org/openjax/expect)
-[![Coverage Status](https://coveralls.io/repos/github/openjax/expect/badge.svg)](https://coveralls.io/github/openjax/expect)
-[![Javadocs](https://www.javadoc.io/badge/org.openjax/expect.svg)](https://www.javadoc.io/doc/org.openjax/expect)
-[![Released Version](https://img.shields.io/maven-central/v/org.openjax/expect.svg)](https://mvnrepository.com/artifact/org.openjax/expect)
+[![Build Status](https://travis-ci.org/openjax/expect.svg?1)](https://travis-ci.org/openjax/expect)
+[![Coverage Status](https://coveralls.io/repos/github/openjax/expect/badge.svg?1)](https://coveralls.io/github/openjax/expect)
+[![Javadocs](https://www.javadoc.io/badge/org.openjax/expect.svg?1)](https://www.javadoc.io/doc/org.openjax/expect)
+[![Released Version](https://img.shields.io/maven-central/v/org.openjax/expect.svg?1)](https://mvnrepository.com/artifact/org.openjax/expect)
 
 ## Introduction
 
