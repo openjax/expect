@@ -18,7 +18,7 @@ package org.openjax.expect;
 
 import java.io.IOException;
 
-public abstract class ScannerHandler {
+abstract class ScannerHandler {
   private final String pattern;
 
   public ScannerHandler(final String pattern) {

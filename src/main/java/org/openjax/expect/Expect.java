@@ -61,11 +61,12 @@ public class Expect {
         if (!Character.isWhitespace(arg.charAt(i)))
           break;
 
-      if (arg.startsWith("\"")) {
+      final char ch0 = arg.charAt(0);
+      if (ch0 == '"') {
         start = Strings.indexOfUnQuoted(command, '"', start + 2 + i);
         arg = command.substring(end + 2, start);
       }
-      else if (arg.startsWith("'")) {
+      else if (ch0 == '\'') {
         start = Strings.indexOfUnQuoted(command, '\'', start + 2 + i);
         arg = command.substring(end + 2, start);
       }

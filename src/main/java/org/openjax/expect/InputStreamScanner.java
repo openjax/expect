@@ -51,8 +51,7 @@ public class InputStreamScanner extends Thread {
   public void run() {
     final StringBuilder builder = new StringBuilder();
     try {
-      char ch;
-      while ((ch = (char)in.read()) != -1) {
+      for (char ch; (ch = (char)in.read()) != -1;) {
         if (ch == '\n')
           builder.setLength(0);
         else if (ch != ' ' || builder.length() != 0)
