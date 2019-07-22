@@ -16,9 +16,12 @@
 -->
 <xs:schema
   elementFormDefault="qualified"
-  targetNamespace="http://www.openjax.org/expect-0.2.11.xsd"
-  xmlns:ex="http://www.openjax.org/expect-0.2.11.xsd"
+  targetNamespace="http://www.openjax.org/expect-0.2.xsd"
+  xmlns:ex="http://www.openjax.org/expect-0.2.xsd"
+  xmlns:dt="http://www.openjax.org/xml/datatypes-0.9.xsd"
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://www.openjax.org/xml/datatypes-0.9.xsd" schemaLocation="http://www.openjax.org/xml/datatypes-0.9.xsd"/>
   
   <xs:element name="script">
     <xs:complexType>
@@ -48,7 +51,7 @@
         </xs:unique>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="exec" type="xs:string" use="required"/>
+    <xs:attribute name="exec" type="dt:stringNonEmpty" use="required"/>
     <xs:attribute name="fork" default="async">
       <xs:simpleType>
         <xs:restriction base="xs:string">

@@ -15,9 +15,9 @@
   program. If not, see <http://opensource.org/licenses/MIT/>.
 -->
 <ex:script
-  xmlns:ex="http://www.openjax.org/expect-0.2.13.xsd"
+  xmlns:ex="http://www.openjax.org/expect-0.2.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.openjax.org/expect-0.2.13.xsd http://www.openjax.org/expect.xsd">
+  xsi:schemaLocation="http://www.openjax.org/expect-0.2.xsd http://www.openjax.org/expect.xsd">
   <ex:process exec="java org.openjax.expect.ExpectSimulator ${date}" fork="sync">
     <ex:rule id="r1" expect="Would you like to create a roster\?" respond="Y"/>
     <ex:rule id="r2" expect="What is the name of the person\?" respond="${name}"/>

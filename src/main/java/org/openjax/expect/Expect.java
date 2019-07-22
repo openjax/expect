@@ -28,9 +28,9 @@ import java.util.Map;
 import org.libj.exec.Processes;
 import org.libj.util.ClassLoaders;
 import org.libj.util.Strings;
-import org.openjax.expect_0_2_13.ProcessType;
-import org.openjax.expect_0_2_13.RuleType;
-import org.openjax.expect_0_2_13.Script;
+import org.openjax.expect_0_2.ProcessType;
+import org.openjax.expect_0_2.RuleType;
+import org.openjax.expect_0_2.Script;
 import org.openjax.jaxb.xjc.JaxbUtil;
 
 public class Expect {
