@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+
+import javax.xml.bind.UnmarshalException;
 
 import org.libj.exec.Processes;
 import org.libj.lang.Strings;
@@ -33,8 +36,10 @@ import org.openjax.expect_0_2.RuleType;
 import org.openjax.expect_0_2.Script;
 import org.openjax.jaxb.xjc.JaxbUtil;
 
-public class Expect {
-  public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws Exception {
+public final class Expect {
+  private static final Pattern classNamePattern = Pattern.compile("([_a-zA-Z0-9]+\\.)+[_a-zA-Z0-9]+");
+
+  public static void start(final InputStream in, final OutputStream out, final OutputStream err, final ExpectCallback callback, final URL scriptUrl) throws IOException, UnmarshalException, IllegalArgumentException, ClassNotFoundException, InterruptedException {
     final Script script = JaxbUtil.parse(Script.class, scriptUrl);
 
     final ProcessType processType = script.getProcess();
@@ -86,7 +91,7 @@ public class Expect {
           final String[] parts = arg.substring(2).split("=", 2);
           props.put(parts[0], parts[1]);
         }
-        else if (arg.matches("([_a-zA-Z0-9]+\\.)+[_a-zA-Z0-9]+")) {
+        else if (classNamePattern.matcher(arg).matches()) {
           if (className != null)
             throw new IllegalArgumentException("There is a problem with the regex used to determine the final class name. We have matched it twice!!");
 
@@ -122,8 +127,9 @@ public class Expect {
               final Map<String,String> variables = callback.rule(rule.getId(), rule.getExpect(), response, line);
               response = dereference(response, variables);
 
-              process.getOutputStream().write(response.getBytes());
-              process.getOutputStream().flush();
+              final OutputStream out = process.getOutputStream();
+              out.write(response.getBytes());
+              out.flush();
             }
             catch (final InterruptedException e) {
               process.destroy();

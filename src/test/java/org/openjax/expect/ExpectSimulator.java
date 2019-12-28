@@ -21,17 +21,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public final class ExpectSimulator {
-  private static List<Prompt> prompts = new ArrayList<>();
+  private static final List<Prompt> prompts = new ArrayList<>();
+
+  private ExpectSimulator() {
+  }
 
   private static final class Prompt {
-    private List<String> answers = new ArrayList<>();
+    private final List<String> answers = new ArrayList<>();
     private final String prompt;
     private final String matchLeft;
     private Prompt left;
     private final String matchRight;
     private Prompt right;
 
-    public Prompt(final String prompt, final String matchLeft, Prompt left, final String matchRight, final Prompt right) {
+    private Prompt(final String prompt, final String matchLeft, Prompt left, final String matchRight, final Prompt right) {
       this.prompt = prompt;
       this.matchLeft = matchLeft;
       this.left = left;

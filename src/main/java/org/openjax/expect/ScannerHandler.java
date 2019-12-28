@@ -21,7 +21,7 @@ import java.io.IOException;
 abstract class ScannerHandler {
   private final String pattern;
 
-  public ScannerHandler(final String pattern) {
+  ScannerHandler(final String pattern) {
     this.pattern = pattern;
   }
 

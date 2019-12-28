@@ -24,11 +24,11 @@ public class NonBlockingInputStream extends InputStream {
   private final byte[] buffer;
   private final int tempBufferSize;
   private volatile int writeAhead;
-  private volatile int writeIndex = 0;
-  private volatile int readIndex = 0;
+  private volatile int writeIndex;
+  private volatile int readIndex;
   private volatile IOException ioException;
-  private boolean eof = false;
-  private int lost = 0;
+  private boolean eof;
+  private int lost;
 
   public NonBlockingInputStream(final InputStream in, final int bufferSize) {
     if (bufferSize == 0)
@@ -36,7 +36,7 @@ public class NonBlockingInputStream extends InputStream {
 
     this.in = in;
     this.buffer = new byte[bufferSize];
-    this.tempBufferSize = (int)Math.round(Math.log(bufferSize) / Math.log(2));
+    this.tempBufferSize = (int)Math.round(StrictMath.log(bufferSize) / StrictMath.log(2));
     this.writeAhead = bufferSize;
     new ReaderThread().start();
   }
@@ -70,14 +70,14 @@ public class NonBlockingInputStream extends InputStream {
   }
 
   private final class ReaderThread extends Thread {
-    public ReaderThread() {
+    private ReaderThread() {
       setName(NonBlockingInputStream.this.getClass().getSimpleName() + "$" + getClass().getSimpleName() + "@" + Integer.toHexString(hashCode()));
       setPriority(Thread.MAX_PRIORITY);
     }
 
     @Override
     public void run() {
-      int length = 0;
+      int length;
       final byte[] bytes = new byte[tempBufferSize];
       try {
         while ((length = in.read(bytes)) != -1) {

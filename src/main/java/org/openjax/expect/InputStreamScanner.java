@@ -30,7 +30,7 @@ public class InputStreamScanner extends Thread {
     this.currentNodes = handlers == null ? null : handlers.getChildren();
   }
 
-  private boolean onMatch(final String line, final List<ListTree.Node<ScannerHandler>> nodes) throws IOException {
+  private boolean onMatch(final String line, final List<? extends ListTree.Node<ScannerHandler>> nodes) throws IOException {
     boolean match = false;
     for (final ListTree.Node<ScannerHandler> node : nodes) {
       if (node.getValue() == null) {
@@ -51,7 +51,7 @@ public class InputStreamScanner extends Thread {
   public void run() {
     final StringBuilder builder = new StringBuilder();
     try {
-      for (char ch; (ch = (char)in.read()) != -1;) {
+      for (int ch; (ch = in.read()) != -1;) {
         if (ch == '\n')
           builder.setLength(0);
         else if (ch != ' ' || builder.length() != 0)
@@ -79,7 +79,7 @@ public class InputStreamScanner extends Thread {
         try {
           notifyAll();
         }
-        catch (final IllegalMonitorStateException e) {
+        catch (final IllegalMonitorStateException ignored) {
         }
       }
     }
