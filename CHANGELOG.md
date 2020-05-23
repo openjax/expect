@@ -1,6 +1,8 @@
 # Changes by Version
 
-## [v0.2.14](https://github.com/openjax/expect/compare/f8e6c739e57e61530988aff98da54e11bbe1520f..HEAD) (2020-05-23)
+## [v0.2.15-SNAPSHOT](https://github.com/openjax/expect/compare/203ae396f931115c101e97b11e872c8cf537e4e7..HEAD)
+
+## [v0.2.14](https://github.com/openjax/expect/compare/f8e6c739e57e61530988aff98da54e11bbe1520f..203ae396f931115c101e97b11e872c8cf537e4e7) (2020-05-23)
 * Use `StrictMath` instead of `Math`.
 * Reduce visibility of `ExpectSimulator`.
 
