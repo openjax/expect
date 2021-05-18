@@ -22,7 +22,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:import namespace="http://www.openjax.org/xml/datatypes-0.9.xsd" schemaLocation="http://www.openjax.org/xml/datatypes-0.9.xsd"/>
-  
+
   <xs:element name="script">
     <xs:complexType>
       <xs:sequence>
@@ -30,7 +30,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:complexType name="processType">
     <xs:sequence>
       <xs:element name="rule" type="ex:ruleType" maxOccurs="unbounded"/>
@@ -61,7 +61,7 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
-  
+
   <xs:complexType name="ruleType">
     <xs:attribute name="id" type="xs:ID" use="required"/>
     <xs:attribute name="expect" type="xs:string" use="required"/>
