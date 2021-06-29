@@ -1,6 +1,6 @@
 # Expect
 
-[![Build Status](https://github.com/openjax/expect/workflows/build.yml/badge.svg)](https://github.com/openjax/expect/actions/workflows/build.yml)
+[![Build Status](https://github.com/openjax/expect/actions/workflows/build.yml/badge.svg)](https://github.com/openjax/expect/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/openjax/expect/badge.svg)](https://coveralls.io/github/openjax/expect)
 [![Javadocs](https://www.javadoc.io/badge/org.openjax/expect.svg)](https://www.javadoc.io/doc/org.openjax/expect)
 [![Released Version](https://img.shields.io/maven-central/v/org.openjax/expect.svg)](https://mvnrepository.com/artifact/org.openjax/expect)
