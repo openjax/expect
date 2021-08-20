@@ -35,6 +35,10 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.openjax.xml</groupId>
+        <artifactId>xml-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
         <groupId>org.openjax.jaxb</groupId>
         <artifactId>jaxb-maven-plugin</artifactId>
         <configuration>
@@ -43,10 +47,6 @@
             <schema>src/main/resources/expect.xsd</schema>
           </schemas>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.openjax.xml</groupId>
-        <artifactId>xml-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
