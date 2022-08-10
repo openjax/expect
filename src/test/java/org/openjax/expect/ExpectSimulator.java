@@ -27,7 +27,7 @@ public final class ExpectSimulator {
   }
 
   private static final class Prompt {
-    private final List<String> answers = new ArrayList<>();
+    private final ArrayList<String> answers = new ArrayList<>();
     private final String prompt;
     private final String matchLeft;
     private Prompt left;
@@ -70,8 +70,8 @@ public final class ExpectSimulator {
     }
 
     public void printAnswers() {
-      for (final String answer : answers)
-        System.out.println(answer);
+      for (int i = 0, i$ = answers.size(); i < i$; ++i) // [RA]
+        System.out.println(answers.get(i));
     }
   }
 
@@ -101,8 +101,7 @@ public final class ExpectSimulator {
       System.exit(1);
 
     System.out.println("Running for date: " + args[0]);
-    Prompt prompt = r1;
-    while (prompt != null) {
+    for (Prompt prompt = r1; prompt != null;) { // [X]
       System.out.print(prompt.getPrompt() + " ");
       try (final Scanner input = new Scanner(System.in)) {
         final String line = input.nextLine().trim();
@@ -110,8 +109,8 @@ public final class ExpectSimulator {
       }
     }
 
-    for (final Prompt p : prompts)
-      p.printAnswers();
+    for (int i = 0, i$ = prompts.size(); i < i$; ++i) // [RA]
+      prompts.get(i).printAnswers();
 
     System.out.println("Thanks for playing!");
   }

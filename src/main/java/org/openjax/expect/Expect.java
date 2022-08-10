@@ -45,7 +45,7 @@ public final class Expect {
     final ProcessType processType = script.getProcess();
     final String exec = processType.getExec().trim();
     final Map<String,String> variables = callback.process(exec);
-    final List<String> args = new ArrayList<>();
+    final ArrayList<String> args = new ArrayList<>();
 
     final String command = dereference(exec, variables);
     int end = -1;
@@ -62,7 +62,7 @@ public final class Expect {
 
       String arg = command.substring(end + 1, start);
       int i = 0;
-      for (; i < arg.length(); ++i)
+      for (; i < arg.length(); ++i) // [N]
         if (!Character.isWhitespace(arg.charAt(i)))
           break;
 
@@ -85,8 +85,9 @@ public final class Expect {
     if (exec.startsWith("java")) {
       String className = null;
       final Map<String,String> props = new HashMap<>();
-      final List<String> javaArgs = new ArrayList<>();
-      for (final String arg : args) {
+      final ArrayList<String> javaArgs = new ArrayList<>();
+      for (int i = 0, i$ = args.size(); i < i$; ++i) { // [RA]
+        final String arg = args.get(i);
         if (arg.startsWith("-D")) {
           final String[] parts = arg.substring(2).split("=", 2);
           props.put(parts[0], parts[1]);
@@ -118,7 +119,7 @@ public final class Expect {
       final List<RuleType> rules = processType.getRule();
       final Map<String,ScannerHandler> scannerMap = new HashMap<>();
       final Map<String,ListTree.Node<ScannerHandler>> treeNodeMap = new HashMap<>();
-      for (final RuleType rule : rules) {
+      for (final RuleType rule : rules) { // [?]
         final ScannerHandler scanner = new ScannerHandler(rule.getExpect()) {
           @Override
           public void match(final String line) throws IOException {
@@ -145,14 +146,12 @@ public final class Expect {
       }
 
       final List<ProcessType.Tree.Node> nodes = processType.getTree().getNode();
-      for (final ProcessType.Tree.Node node : nodes) {
+      for (final ProcessType.Tree.Node node : nodes) { // [?]
         final ListTree.Node<ScannerHandler> treeNode = treeNodeMap.get(((RuleType)node.getRule()).getId());
         final List<Object> children = node.getChildren();
-        if (children == null)
-          continue;
-
-        for (final Object childId : children)
-          treeNode.addChild(treeNodeMap.get(((RuleType)childId).getId()));
+        if (children != null)
+          for (int j = 0, j$ = children.size(); j < j$; ++j) // [RA]
+            treeNode.addChild(treeNodeMap.get(((RuleType)children.get(j)).getId()));
       }
 
       final ListTree<ScannerHandler> tree = new ListTree<>();

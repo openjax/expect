@@ -32,9 +32,10 @@ public class InputStreamScanner extends Thread {
 
   private boolean onMatch(final String line, final List<? extends ListTree.Node<ScannerHandler>> nodes) throws IOException {
     boolean match = false;
-    for (final ListTree.Node<ScannerHandler> node : nodes) {
+    for (final ListTree.Node<ScannerHandler> node : nodes) { // [?]
       if (node.getValue() == null) {
-        for (final ListTree.Node<ScannerHandler> child : node.getChildren())
+        final List<ListTree.Node<ScannerHandler>> children = node.getChildren();
+        for (final ListTree.Node<ScannerHandler> child : children) // [?]
           onMatch(line, child.getChildren());
       }
       else if (line.matches(node.getValue().getPattern())) {
@@ -51,16 +52,13 @@ public class InputStreamScanner extends Thread {
   public void run() {
     final StringBuilder builder = new StringBuilder();
     try {
-      for (int ch; (ch = in.read()) != -1;) {
+      for (int ch; (ch = in.read()) != -1;) { // [N]
         if (ch == '\n')
           builder.setLength(0);
         else if (ch != ' ' || builder.length() != 0)
           builder.append(ch);
 
-        if (currentNodes == null)
-          continue;
-
-        if (onMatch(builder.toString(), currentNodes)) {
+        if (currentNodes != null && onMatch(builder.toString(), currentNodes)) {
           if (currentNodes == null)
             return;
 
