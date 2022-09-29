@@ -104,8 +104,7 @@ public final class ExpectSimulator {
     for (Prompt prompt = r1; prompt != null;) { // [X]
       System.out.print(prompt.getPrompt() + " ");
       try (final Scanner input = new Scanner(System.in)) {
-        final String line = input.nextLine().trim();
-        prompt = prompt.getNext(line);
+        prompt = prompt.getNext(input.nextLine().trim());
       }
     }
 
