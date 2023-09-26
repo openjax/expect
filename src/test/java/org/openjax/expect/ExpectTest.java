@@ -49,6 +49,7 @@ public class ExpectTest {
             variables.put("age", "14\n");
             variables.put("attending", "N\n");
             break;
+
           case 1:
             variables.put("name", "David\n");
             variables.put("adultOrChild", "C\n");
@@ -61,6 +62,7 @@ public class ExpectTest {
             variables.put("driving", "N\n");
             variables.put("printRoster", "N\n");
             break;
+
           case 2:
             variables.put("name", "Natalie\n");
             variables.put("adultOrChild", "C\n");
@@ -73,6 +75,7 @@ public class ExpectTest {
             variables.put("driving", "N\n");
             variables.put("printRoster", "N\n");
             break;
+
           case 3:
             variables.put("name", "Sylvie\n");
             variables.put("adultOrChild", "C\n");
@@ -86,12 +89,14 @@ public class ExpectTest {
             variables.put("needRide", "Y\n");
             variables.put("printRoster", "N\n");
             break;
+
           case 4:
             variables.put("name", "Jon\n");
             variables.put("adultOrChild", "A\n");
             variables.put("maleOrFemale", "M\n");
             variables.put("attending", "N\n");
             break;
+
           case 5:
             variables.put("name", "Jake\n");
             variables.put("adultOrChild", "A\n");
@@ -102,6 +107,7 @@ public class ExpectTest {
             variables.put("drinking", "N\n");
             variables.put("printRoster", "N\n");
             break;
+
           case 6:
             variables.put("name", "Shoshana\n");
             variables.put("adultOrChild", "A\n");
@@ -113,6 +119,7 @@ public class ExpectTest {
             variables.put("driving", "N\n");
             variables.put("printRoster", "N\n");
             break;
+
           case 7:
             variables.put("name", "Katie\n");
             variables.put("adultOrChild", "A\n");
