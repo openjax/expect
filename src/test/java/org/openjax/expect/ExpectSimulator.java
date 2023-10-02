@@ -17,11 +17,10 @@
 package org.openjax.expect;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public final class ExpectSimulator {
-  private static final List<Prompt> prompts = new ArrayList<>();
+  private static final ArrayList<Prompt> prompts = new ArrayList<>();
 
   private ExpectSimulator() {
   }
