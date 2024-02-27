@@ -1,6 +1,9 @@
 # Changes by Version
 
-## [v0.2.16-SNAPSHOT](https://github.com/libj/util/compare/549b7e9ae81dece82b08d28d15039a303ec437cd..HEAD)
+## [v0.2.17-SNAPSHOT](https://github.com/libj/util/compare/2f3fd30fd20a637b59289f0cea25b689680dd78d..HEAD)
+
+## [v0.2.16](https://github.com/libj/util/compare/549b7e9ae81dece82b08d28d15039a303ec437cd..2f3fd30fd20a637b59289f0cea25b689680dd78d) (2024-02-27)
+* #2 Redeclare `List` as `ArrayList`
 
 ## [v0.2.15](https://github.com/openjax/expect/compare/203ae396f931115c101e97b11e872c8cf537e4e7..549b7e9ae81dece82b08d28d15039a303ec437cd) (2023-09-20)
 * #1 Transition to GitHub Actions
